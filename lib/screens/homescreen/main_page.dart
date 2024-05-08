@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../model/course/course_viewmodel.dart';
-
 import '../../model/profile/profile_viewmodel.dart';
 import '../screen.dart';
 
 class MainPage extends StatefulWidget {
   int? id;
   int? index;
-  MainPage({Key? key, this.id, this.index}) : super(key: key);
+  MainPage({super.key, this.id, this.index});
 
   @override
   State<MainPage> createState() => _MainPageState();
@@ -57,3 +56,4 @@ class _MainPageState extends State<MainPage> {
     );
   }
 }
+ 

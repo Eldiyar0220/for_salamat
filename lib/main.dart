@@ -1,10 +1,14 @@
+import 'package:dimplom/api/dio_generator.dart';
 import 'package:dimplom/firebase_options.dart';
 import 'package:dimplom/model/course/course_viewmodel.dart';
+import 'package:dimplom/screens/homescreen/data/repository.dart';
+import 'package:dimplom/screens/homescreen/presentation/cubit/home_cubit.dart';
 import 'package:dimplom/screens/screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:provider/provider.dart';
 
 import 'model/auth/auth_viewmodel.dart';
 import 'model/profile/profile_viewmodel.dart';
@@ -12,17 +16,35 @@ import 'model/wishlist/wishlist_viewmodel.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const MyApp());
+  runApp(
+    MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider(
+          create: (context) => DioSettings(),
+        ),
+        RepositoryProvider(
+          create: (context) =>
+              Repository(dio: RepositoryProvider.of<DioSettings>(context)),
+        ),
+        BlocProvider(
+          create: (context) => HomeCubit(
+            RepositoryProvider.of<Repository>(context),
+          ),
+        )
+      ],
+      child: const MyApp(),
+    ),
+  );
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
-);
+  );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
-@override  
+  @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
@@ -42,8 +64,7 @@ class MyApp extends StatelessWidget {
             ),
           ),
           outlinedButtonTheme: OutlinedButtonThemeData(
-            style: OutlinedButton.styleFrom(
-            ),
+            style: OutlinedButton.styleFrom(),
           ),
           checkboxTheme: CheckboxThemeData(
             shape: RoundedRectangleBorder(

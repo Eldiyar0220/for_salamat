@@ -8,7 +8,7 @@ export './auth/password_reset_success_screen.dart';
 
 //Homescreen
 export './homescreen/main_page.dart';
-export './homescreen/home_screen.dart';
+export 'homescreen/presentation/page/home_screen.dart';
 export './homescreen/search_screen.dart';
 
 //Wishlist

@@ -1,8 +1,8 @@
 import 'package:dimplom/components/logo.dart';
 import 'package:dimplom/model/profile/profile_viewmodel.dart';
 import 'package:dimplom/screens/homescreen/main_page.dart';
-import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:flutter/material.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -11,7 +11,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../model/auth/auth_viewmodel.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+  const LoginScreen({super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -69,6 +69,18 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  ElevatedButton(
+                    child: const Text('Button label'),
+                    onPressed: () {
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MainPage(),
+                        ),
+                        (route) => false,
+                      );
+                    },
+                  ),
                   const Text('Email'),
                   buildEmailField(emailController: emailController),
                   const SizedBox(height: 14),
@@ -195,8 +207,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
 class buildLoginTextHeader extends StatelessWidget {
   const buildLoginTextHeader({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -228,9 +240,9 @@ class buildLoginTextHeader extends StatelessWidget {
 
 class buildEmailField extends StatelessWidget {
   const buildEmailField({
-    Key? key,
+    super.key,
     required this.emailController,
-  }) : super(key: key);
+  });
 
   final TextEditingController emailController;
 

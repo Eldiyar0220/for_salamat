@@ -2,7 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 class CarouselHero extends StatelessWidget {
-  const CarouselHero({Key? key}) : super(key: key);
+  const CarouselHero({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,8 +18,9 @@ class CarouselHero extends StatelessWidget {
             elevation: 2,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(5),
-              child: Image.asset(
-                'assets/banner/edutiv_go.png',
+              child: Image.network(
+                'https://www.hostinger.com/tutorials/wp-content/uploads/sites/2/2021/08/learn-coding-online-for-free.png',
+                //'assets/banner/edutiv_go.png',
                 fit: BoxFit.fill,
               ),
             ),

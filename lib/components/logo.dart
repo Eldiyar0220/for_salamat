@@ -6,7 +6,7 @@ class Logo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      'Edutiv.',
+      'Диплом',
       style: TextStyle(
           fontSize: 24,
           fontWeight: FontWeight.bold,
