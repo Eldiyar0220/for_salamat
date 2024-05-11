@@ -10,6 +10,7 @@ class CarouselHero extends StatelessWidget {
       options: CarouselOptions(
         height: 130.0,
         autoPlay: true,
+        viewportFraction: 0.7,
       ),
       items: [
         GestureDetector(

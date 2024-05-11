@@ -6,6 +6,7 @@ import 'package:dimplom/screens/homescreen/presentation/page/child_page/detail_p
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -39,16 +40,6 @@ class _HomeScreenState extends State<HomeScreen> {
               'Explore Categories',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
             ),
-            Container(
-              height: 50,
-              width: 50,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                border: Border.all(),
-                borderRadius: BorderRadius.circular(10),
-                color: Colors.blue,
-              ),
-            ),
             const Row(
               children: [
                 Text(
@@ -63,10 +54,13 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             BlocConsumer<HomeCubit, HomeState>(
               listener: (context, state) {
-                // TODO: implement listener
+                if (state is HomeLoading) {
+                  EasyLoading.show();
+                }
               },
               builder: (context, state) {
                 if (state is HomeSuccess) {
+                  EasyLoading.dismiss();
                   return Expanded(
                     child: ListView.separated(
                       itemCount: state.topics.length,
@@ -98,7 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   );
                 }
 
-                return const Center(child: CircularProgressIndicator());
+                return const SizedBox.shrink();
               },
             ),
           ],
